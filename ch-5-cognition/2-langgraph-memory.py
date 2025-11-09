@@ -1,3 +1,45 @@
+"""
+How to Run
+-------------------------------------------------------------------------------
+0.Prerequisites
+-------------------------------------------------------------------------------
+Install required packages in your environment:
+
+    pip install -U langgraph langgraph-checkpoint-sqlite
+
+1. First Session – Start Conversation
+-------------------------------------
+Run the script:
+    python 2-langgraph-memory.py
+
+Type messages in the terminal:
+    You: hi
+    AI: Hello there!
+    You: I love Agentic AI and MLOps
+    AI: That's fantastic! They're both incredibly exciting fields.
+    You: exit
+
+→ This creates a file named 'checkpoints.db' containing your conversation state.
+
+2. Second Session – Resume Conversation
+----------------------------------------
+Re-run the same command:
+    python 2-langgraph-memory.py
+
+Type:
+    You: what do I love?
+    AI: You love Agentic AI and MLOps!
+
+→ The agent correctly recalls earlier turns from the database.
+
+3. Demonstrate Short-Term vs. New Session
+------------------------------------------
+If you want a *fresh memory* (new thread), change the THREAD_ID variable:
+
+    THREAD_ID = "thread-2"
+
+Re-run the script; it will start a blank conversation but keep old ones saved.
+"""
 from typing import TypedDict, Annotated
 from langgraph.graph import StateGraph, START, END
 from langgraph.checkpoint.sqlite import SqliteSaver
@@ -19,7 +61,6 @@ llm = ChatGoogleGenerativeAI(
 )
 
 class ChatState(TypedDict):
-    # automatically merged by LangGraph
     messages: Annotated[list[HumanMessage], add_messages]
     user_input: str
 
@@ -63,3 +104,5 @@ if __name__ == "__main__":
             )
             # get the model’s latest message (the last in merged list)
             print("AI:", result["messages"][-1].content)
+
+# How to Run this Script:
