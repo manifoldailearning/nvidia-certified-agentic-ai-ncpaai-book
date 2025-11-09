@@ -1,5 +1,4 @@
 # 4.6 Mini Lab – Evaluate and Tune an Agent 
-# Runs locally with simple evaluation — no LangSmith needed.
 # Add your Google API key to a .env file as GOOGLE_API_KEY
 
 from dotenv import load_dotenv
