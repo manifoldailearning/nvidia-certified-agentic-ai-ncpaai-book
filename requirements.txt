@@ -8,3 +8,4 @@ wikipedia
 langchain-community
 langchain_google_genai
 langgraph-checkpoint-sqlite
+faiss-cpu
