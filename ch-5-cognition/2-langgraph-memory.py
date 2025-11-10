@@ -89,7 +89,7 @@ workflow.add_edge("chat", END)
 if __name__ == "__main__":
     with SqliteSaver.from_conn_string("checkpoints.db") as checkpointer:
         app = workflow.compile(checkpointer=checkpointer)
-        THREAD_ID = "user-1" # modify per user/session
+        THREAD_ID = "thread-3" # modify per user/session
 
         print("Type 'exit' to stop.\n")
         while True:
