@@ -8,11 +8,6 @@ What this does:
 4. Reflection node asks the LLM to critique the result.
 5. The whole run is saved to SQLite, so re-running with the same thread_id
    will keep the previous messages/state.
-
-Prereqs:
-    pip install langgraph langgraph-checkpoint-sqlite langchain-openai
-    export OPENAI_API_KEY="..."
-
 """
 
 from typing import TypedDict
