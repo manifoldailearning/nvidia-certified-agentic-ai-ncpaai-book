@@ -1,0 +1,10 @@
+{
+    "id": "doc_001",
+    "title": "LangChain Vector Store Overview",
+    "content": "LangChain integrates with FAISS, PGVector, and other vector databases.",
+    "source": "internal_docs/langchain_vector_stores.md",
+    "embedding_vector": [0.12, 0.34, 0.56],
+    "tags": ["retrieval", "embeddings", "langchain"],
+    "last_updated": "2025-10-28T10:00:00Z"
+  }
+  
