@@ -12,9 +12,9 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 # Initialize FastAPI
 app = FastAPI(title="Gemini Agentic API")
 
-# Initialize Gemini model (fast + cheap + great for teaching)
+# Initialize Gemini model 
 llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",   # or "gemini-2.0-flash"
+    model="gemini-2.5-flash",   
     api_key=GOOGLE_API_KEY
 )
 
