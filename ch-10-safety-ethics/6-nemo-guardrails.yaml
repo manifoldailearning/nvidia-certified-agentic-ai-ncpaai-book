@@ -1,0 +1,6 @@
+define guardrails:
+    block if toxicity > 0.6
+    block if contains_sensitive_pii
+    require grounding for financial_advice
+    escalate if user_intent == "high_risk"
+    restrict tools to ["db_lookup", "fraud_check"]

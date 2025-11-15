@@ -1,0 +1,13 @@
+{
+    "timestamp": "2025-11-04T12:30:00Z",
+    "input": "Summarize financial report.",
+    "output": "The company achieved 20% growth.",
+    "reasoning_trace": [
+      "Step 1: Parsed input for financial data",
+      "Step 2: Extracted growth percentage",
+      "Step 3: Generated summary response"
+    ],
+    "guardrail_status": "Passed",
+    "bias_score": 0.05
+  }
+  
