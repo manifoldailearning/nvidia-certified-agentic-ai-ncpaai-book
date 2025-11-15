@@ -1,0 +1,19 @@
+name: "nemo_model"
+platform: "onnxruntime_onnx"
+max_batch_size: 8
+
+input [
+  {
+    name: "INPUT__0"
+    data_type: TYPE_FP32
+    dims: [ 4 ]
+  }
+]
+
+output [
+  {
+    name: "OUTPUT__0"
+    data_type: TYPE_FP32
+    dims: [ 3 ]
+  }
+]

@@ -1,0 +1,14 @@
+# snippet from the book - for reference only
+model:
+  pretrained_model_name: 'google/gemma-2b-it'
+  max_seq_length: 2048
+  optimizer:
+    name: adamw
+    lr: 2e-5
+trainer:
+  gpus: 1
+  max_epochs: 3
+  precision: 16
+data:
+  train_dataset: /data/train.jsonl
+  val_dataset: /data/val.jsonl

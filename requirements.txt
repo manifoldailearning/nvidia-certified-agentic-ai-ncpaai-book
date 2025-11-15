@@ -12,3 +12,7 @@ faiss-cpu
 fastapi 
 uvicorn
 pydantic
+torch
+onnxscript
+requests
+numpy

@@ -1,0 +1,7 @@
+# snippet from the book - for reference only
+rails:
+  input:
+    - ensure_no_personal_data
+  output:
+    - ban_toxicity
+    - enforce_company_policy

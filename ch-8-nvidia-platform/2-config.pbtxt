@@ -1,0 +1,11 @@
+# snippet from the book - for reference only
+
+name: "nemo_ensemble"
+platform: "ensemble"
+max_batch_size: 16
+
+ensemble_scheduling {
+  step [{ model_name: "tokenizer", model_output: "TEXT", model_input: "RAW_INPUT" }]
+  step [{ model_name: "nemo_model", model_output: "PREDICTION", model_input: "TEXT" }]
+  step [{ model_name: "postprocess", model_output: "FINAL_OUTPUT", model_input: "PREDICTION" }]
+}
