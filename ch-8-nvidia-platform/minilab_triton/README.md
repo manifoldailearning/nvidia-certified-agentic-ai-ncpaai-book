@@ -169,6 +169,21 @@ This script will:
 
 ## Troubleshooting
 
+### Memory Issues When Pulling Docker Image
+
+If you encounter memory-related errors when pulling the Triton server Docker image (e.g., "out of memory" or "no space left on device"), you need to increase the resources allocated to Docker:
+
+1. Open Docker Desktop
+2. Go to **Settings** (or **Preferences** on macOS)
+3. Navigate to **Resources** → **Advanced**
+4. Increase the allocated resources:
+   - **Memory:** Increase to at least 8GB (16GB recommended)
+   - **Disk image size:** Increase if you're running out of disk space - increase to atleast 80GB(128GB Recommended)
+5. Click **Apply & Restart**
+6. Wait for Docker to restart, then try pulling the image again
+
+The Triton Inference Server image is large and requires sufficient memory and disk space to download and run.
+
 ### Port Already in Use
 
 If you get an error about ports being in use, you can:
