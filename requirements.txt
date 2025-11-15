@@ -16,3 +16,4 @@ torch
 onnxscript
 requests
 numpy
+prometheus_client
