@@ -8,9 +8,8 @@ from typing import TypedDict, List
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
+    model="gemini-3.8-flash",
     google_api_key=GOOGLE_API_KEY,
-    temperature=0.3,
 )
 
 class ConversationState(TypedDict):
@@ -23,7 +22,7 @@ def talk(state: ConversationState) -> ConversationState:
 
     # stream from LLM and print live
     for chunk in llm.stream(user_messages[-1]):
-        print(chunk.content, end="", flush=True)
+        print(chunk.text, end="", flush=True)
 
     print()  # newline after stream
     # you can append the last user msg to history

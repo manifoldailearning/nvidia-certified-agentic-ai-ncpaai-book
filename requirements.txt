@@ -1,19 +1,41 @@
-langchain
-langchain-openai
-langchain-google
-pydantic
-python-dotenv
-langgraph
-wikipedia
-langchain-community
-langchain_google_genai
-langgraph-checkpoint-sqlite
-faiss-cpu
-fastapi 
-uvicorn
-pydantic
-torch
-onnxscript
-requests
-numpy
-prometheus_client
+# Companion code for the NCP-AAI Unofficial Exam Prep Guide (2026 revision)
+# Tested on Python 3.11+ with the versions given as minimums below.
+
+# LangChain / LangGraph (1.x)
+langchain>=1.4,<2
+langchain-core>=1.7,<2
+langgraph>=1.2,<2
+langgraph-checkpoint-sqlite>=3.1
+langchain-google-genai>=4.4,<5
+langchain-text-splitters>=1.1
+# langchain-community is being sunset (no longer actively maintained); used here only for the FAISS vector store
+langchain-community>=0.4.2
+langsmith>=0.14
+
+# Retrieval
+faiss-cpu>=1.15
+
+# Ch.2 search agent
+wikipedia>=1.4.0
+
+# Ch.7 API mini lab
+fastapi>=0.162
+uvicorn>=0.54
+pydantic>=2.14
+
+# Ch.8 Dynamo-Triton (Triton) mini lab
+torch>=2.9
+onnx>=1.19
+onnxscript>=0.7
+numpy>=2.0
+requests>=2.32
+
+# Ch.9 monitoring
+prometheus_client>=0.26
+
+# Common
+python-dotenv>=1.0
+
+# Optional, only for book snippets:
+#   peft    (ch-3-agent-architecture/6-snippet-book.py)
+#   boto3   (ch-8-nvidia-platform/4-example-invocation.py)

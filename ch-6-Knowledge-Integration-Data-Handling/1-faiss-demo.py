@@ -8,7 +8,7 @@ This script demonstrates how to:
 4. Perform similarity search queries
 
 Requires:
-- pip install langchain-community langchain-google-genai langchain-text-splitters python-dotenv
+- pip install langchain-community faiss-cpu langchain-google-genai langchain-text-splitters python-dotenv
 - GOOGLE_API_KEY in a .env file
 """
 

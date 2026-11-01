@@ -25,9 +25,8 @@ class AgentState(TypedDict):
 
 # 3) LLM
 llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
+    model="gemini-3.8-flash",
     google_api_key=GOOGLE_API_KEY,
-    temperature=0.3,
 )
 
 # 4) Node: agent thinks + maybe calls tool
@@ -98,4 +97,4 @@ if __name__ == "__main__":
     # final answer is the last AI message
     final_msg = [m for m in result["messages"] if isinstance(m, AIMessage)][-1]
     print("Final answer:")
-    print(final_msg.content)
+    print(final_msg.text)

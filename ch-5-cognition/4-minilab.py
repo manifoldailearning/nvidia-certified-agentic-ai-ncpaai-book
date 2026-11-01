@@ -31,7 +31,7 @@ class AgentState(TypedDict):
     messages: Annotated[list[HumanMessage], add_messages]
 
 # ---- Initialize model ----
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.5)
+llm = ChatGoogleGenerativeAI(model="gemini-3.8-flash")
 
 
 # ----- 2. Nodes -----
@@ -64,7 +64,7 @@ def executor_node(state: AgentState) -> AgentState:
     )
 
     resp = llm.invoke([HumanMessage(content=prompt)])
-    result = resp.content
+    result = resp.text
     state["result"] = result
 
     return {
@@ -84,7 +84,7 @@ def reflection_node(state: AgentState) -> AgentState:
     )
 
     resp = llm.invoke([HumanMessage(content=prompt)])
-    reflection = resp.content
+    reflection = resp.text
     state["reflection"] = reflection
 
     return {

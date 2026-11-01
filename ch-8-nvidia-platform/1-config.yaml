@@ -1,4 +1,6 @@
-# snippet from the book - for reference only
+# Illustrative pseudo-config from the book (not a runnable NeMo recipe).
+# Current NeMo LLM fine-tuning lives in NeMo AutoModel / NeMo Megatron Bridge,
+# each with its own recipe format.
 model:
   pretrained_model_name: 'google/gemma-2b-it'
   max_seq_length: 2048

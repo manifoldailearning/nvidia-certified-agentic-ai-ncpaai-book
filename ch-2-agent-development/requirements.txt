@@ -1,9 +1,7 @@
-langchain
-langchain-openai
-langchain-google
-pydantic
-python-dotenv
-langgraph
-wikipedia
-langchain-community
-langchain_google_genai
+# Ch.2 mini lab only (the full set is in ../requirements.txt)
+langchain>=1.4,<2
+langchain-core>=1.7,<2
+langgraph>=1.2,<2
+langchain-google-genai>=4.4,<5
+wikipedia>=1.4.0
+python-dotenv>=1.0

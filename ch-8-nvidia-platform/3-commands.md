@@ -1,6 +1,6 @@
 ```bash
 docker login nvcr.io
-docker pull nvcr.io/nvidia/pytorch:23.10-py3
-ngc registry model download-version nvidia/nemo:2.0
-ngc registry model list --framework pytorch
+docker pull nvcr.io/nvidia/pytorch:26.10-py3
+ngc registry model download-version <org>/[<team>/]<model_name>:<version>   # e.g. a Nemotron checkpoint from the NGC catalog
+ngc registry model list "nvidia/*"
 ```

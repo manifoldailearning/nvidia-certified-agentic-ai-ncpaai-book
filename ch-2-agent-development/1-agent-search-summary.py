@@ -28,9 +28,8 @@ load_dotenv()
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 gemini = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
+    model="gemini-3.8-flash",
     google_api_key=GOOGLE_API_KEY,
-    temperature=0.3,
 )
 
 # ----------------------------------------------------
@@ -92,7 +91,7 @@ Summary:"""
     # chain style: prompt → model
     chain = prompt | gemini
     result = chain.invoke({"context": context})
-    state["summary"] = result.content
+    state["summary"] = result.text
     print("Summary generated.")
     return state
 

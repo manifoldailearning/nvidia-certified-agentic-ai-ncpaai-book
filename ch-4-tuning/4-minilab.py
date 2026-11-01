@@ -12,16 +12,15 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 # Initialize Gemini model
 llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
+    model="gemini-3.8-flash",
     google_api_key=GOOGLE_API_KEY,
-    temperature=0.3,
 )
 
 # 1. Agent logic
 def agent_response(prompt):
     """Simple wrapper to invoke the Gemini model."""
     result = llm.invoke(prompt)
-    return result.content if hasattr(result, "content") else str(result)
+    return result.text
 
 # 2. Simple evaluation metrics
 def evaluate_agent(agent_fn, prompts, answers):

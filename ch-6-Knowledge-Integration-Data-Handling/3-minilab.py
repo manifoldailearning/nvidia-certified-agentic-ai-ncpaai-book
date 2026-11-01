@@ -27,12 +27,12 @@ docs = [
     "RAG (Retrieval-Augmented Generation) combines retrieval with LLM generation.",
     "Persistent memory helps an AI agent recall previous user interactions."
 ]
-embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
+embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
 vectorstore = FAISS.from_texts(docs, embedding=embeddings)
-retriever = vectorstore.as_retriever(k=2)
+retriever = vectorstore.as_retriever(search_kwargs={"k": 2})
 
 # ----- 3. llm -----
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.5)
+llm = ChatGoogleGenerativeAI(model="gemini-3.8-flash")
 
 # ----- 4. node -----
 def rag_with_memory(state: ChatState) -> ChatState:
@@ -57,10 +57,10 @@ def rag_with_memory(state: ChatState) -> ChatState:
     # update history
     history = state.get("chat_history", [])
     history.append(f"User: {query}")
-    history.append(f"AI: {resp.content}")
+    history.append(f"AI: {resp.text}")
 
     state["chat_history"] = history
-    state["answer"] = resp.content
+    state["answer"] = resp.text
     return state
 
 # ----- 5. graph -----

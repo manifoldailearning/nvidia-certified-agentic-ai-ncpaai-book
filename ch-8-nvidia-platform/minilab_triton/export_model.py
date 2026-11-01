@@ -23,10 +23,7 @@ torch.onnx.export(
     "model.onnx",
     input_names=["INPUT__0"],
     output_names=["OUTPUT__0"],
-    dynamic_axes={
-        "INPUT__0": {0: "batch"},
-        "OUTPUT__0": {0: "batch"}
-    }
+    dynamic_shapes={"x": {0: "batch"}},   # "x" is the forward() argument; dim 0 is the batch
 )
 
 print("Exported model.onnx successfully.")

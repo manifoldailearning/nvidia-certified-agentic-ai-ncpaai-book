@@ -12,9 +12,9 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 # Initialize FastAPI
 app = FastAPI(title="Gemini Agentic API")
 
-# Initialize Gemini model 
+# Initialize Gemini model
 llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",   
+    model="gemini-3.8-flash",
     api_key=GOOGLE_API_KEY
 )
 
@@ -34,4 +34,4 @@ def ask_question(payload: AskRequest):
     - Returns the generated response
     """
     result = llm.invoke(payload.question)
-    return AskResponse(response=result.content)
+    return AskResponse(response=result.text)

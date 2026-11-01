@@ -11,9 +11,8 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 # Initialize Gemini model
 llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
+    model="gemini-3.8-flash",
     google_api_key=GOOGLE_API_KEY,
-    temperature=0.3,
 )
 
 # Define the agent state
@@ -50,7 +49,7 @@ def executor(state: AgentState) -> AgentState:
     )
 
     response = llm.invoke([HumanMessage(content=prompt)])
-    state["result"] = response.content
+    state["result"] = response.text
     return state
 
 # ---------- 4. Build LangGraph ----------

@@ -1,6 +1,6 @@
-# Triton Inference Server Minilab
+# NVIDIA Dynamo-Triton (formerly Triton Inference Server) Minilab
 
-This minilab demonstrates how to deploy and serve a PyTorch model using NVIDIA Triton Inference Server. The lab includes exporting a simple neural network model to ONNX format and serving it via Triton.
+This minilab demonstrates how to deploy and serve a PyTorch model using NVIDIA Dynamo-Triton (formerly NVIDIA Triton Inference Server). The container image and CLI are still named `tritonserver`. The lab includes exporting a simple neural network model to ONNX format and serving it via Triton.
 
 ## Overview
 
@@ -14,7 +14,7 @@ This minilab covers:
 
 - Docker installed and running
 - Python 3.11+ (for running the Python scripts)
-- Required Python packages: `torch`, `numpy`, `requests`
+- Required Python packages: `torch`, `onnxscript`, `numpy`, `requests` (current `torch.onnx.export` needs `onnxscript`)
 
 ## Step-by-Step Instructions
 
@@ -48,7 +48,7 @@ The model repository is already set up in the `models/` directory.
 Pull the NVIDIA Triton Inference Server Docker image:
 
 ```bash
-docker pull nvcr.io/nvidia/tritonserver:25.10-py3
+docker pull nvcr.io/nvidia/tritonserver:26.10-py3
 ```
 
 ### Step 4 — Run the Triton Server
@@ -59,7 +59,7 @@ Start the Triton Inference Server with the model repository:
 docker run --rm \
   -p 8000:8000 -p 8001:8001 -p 8002:8002 \
   -v $(pwd)/models:/models \
-  nvcr.io/nvidia/tritonserver:25.10-py3 \
+  nvcr.io/nvidia/tritonserver:26.10-py3 \
   tritonserver --model-repository=/models
 ```
 
@@ -205,6 +205,7 @@ If you get an error about ports being in use, you can:
 
 ## Additional Resources
 
+- [NVIDIA Dynamo-Triton](https://developer.nvidia.com/dynamo-triton)
 - [Triton Inference Server Documentation](https://docs.nvidia.com/deeplearning/triton-inference-server/)
 - [Triton Inference Server GitHub](https://github.com/triton-inference-server/server)
 

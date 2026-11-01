@@ -5,10 +5,10 @@ This script demonstrates Retrieval-Augmented Generation (RAG) using:
 1. FAISS vector store for document retrieval
 2. Google Generative AI embeddings
 3. LangGraph workflow for orchestration
-4. Gemini 2.5 Flash as the LLM
+4. Gemini 3.8 Flash as the LLM
 
 Requires:
-- pip install langchain-community langchain-google-genai langgraph langchain-text-splitters python-dotenv
+- pip install langchain-community faiss-cpu langchain-google-genai langgraph langchain-text-splitters python-dotenv
 - GOOGLE_API_KEY in a .env file
 """
 
@@ -42,14 +42,13 @@ chunks = splitter.split_text(" ".join(docs))
 embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
 vectorstore = FAISS.from_texts(chunks, embedding=embeddings)
 
-retriever = vectorstore.as_retriever(k=3)
+retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
 
 # ----------------------------------------------------
-# 3. Initialize Gemini 2.5 Flash as the LLM
+# 3. Initialize Gemini 3.8 Flash as the LLM
 # ----------------------------------------------------
 llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
-    temperature=0.5
+    model="gemini-3.8-flash",
 )
 
 # ----------------------------------------------------
@@ -66,12 +65,8 @@ def rag_node(state: RAGState) -> RAGState:
     """Retrieve context from FAISS and answer with Gemini."""
     query = state["query"]
 
-    # Newer retrievers use .invoke(query)
-    try:
-        relevant_docs = retriever.invoke(query)
-    except AttributeError:
-        # Fallback for older versions
-        relevant_docs = retriever._get_relevant_documents(query)
+    # Retrievers are Runnables: use .invoke(query)
+    relevant_docs = retriever.invoke(query)
 
     context = "\n\n".join(d.page_content for d in relevant_docs)
 
@@ -84,7 +79,7 @@ def rag_node(state: RAGState) -> RAGState:
     )
 
     resp = llm.invoke(prompt)
-    state["answer"] = resp.content
+    state["answer"] = resp.text
     return state
 
 # ----------------------------------------------------

@@ -6,9 +6,8 @@ load_dotenv()
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
+    model="gemini-3.8-flash",
     google_api_key=GOOGLE_API_KEY,
-    temperature=0.3,
 )
 
 # 2. Original prediction (with an intentional error)
@@ -23,4 +22,4 @@ reflection_prompt = (
 
 # 4. Reflect and correct
 review = llm.invoke(reflection_prompt + "\n\n" + context)
-print(review.content)
+print(review.text)

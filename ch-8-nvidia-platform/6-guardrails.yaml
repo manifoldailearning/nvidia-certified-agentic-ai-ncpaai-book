@@ -1,7 +1,12 @@
-# snippet from the book - for reference only
+# NeMo Guardrails config.yml excerpt: input and output rails are lists of flows.
+# "self check input/output/facts" also need their prompts defined in the config
+# (see the NeMo Guardrails configuration guide).
 rails:
   input:
-    - ensure_no_personal_data
+    flows:
+      - self check input
+      - mask sensitive data on input
   output:
-    - ban_toxicity
-    - enforce_company_policy
+    flows:
+      - self check output
+      - self check facts

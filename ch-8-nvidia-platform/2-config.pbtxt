@@ -1,11 +1,40 @@
-# snippet from the book - for reference only
+# Ensemble config for NVIDIA Dynamo-Triton (formerly Triton Inference Server).
+# Illustrative: the "tokenizer", "nemo_model" and "postprocess" models must exist in the
+# same model repository, with tensor names, data types and dims matching their own configs.
+# In input_map/output_map, "key" is the step model's tensor name and "value" is the
+# ensemble-level tensor name that connects the steps.
 
 name: "nemo_ensemble"
 platform: "ensemble"
 max_batch_size: 16
 
+input [
+  { name: "RAW_INPUT", data_type: TYPE_STRING, dims: [ 1 ] }
+]
+
+output [
+  { name: "FINAL_OUTPUT", data_type: TYPE_STRING, dims: [ 1 ] }
+]
+
 ensemble_scheduling {
-  step [{ model_name: "tokenizer", model_output: "TEXT", model_input: "RAW_INPUT" }]
-  step [{ model_name: "nemo_model", model_output: "PREDICTION", model_input: "TEXT" }]
-  step [{ model_name: "postprocess", model_output: "FINAL_OUTPUT", model_input: "PREDICTION" }]
+  step [
+    {
+      model_name: "tokenizer"
+      model_version: -1
+      input_map { key: "RAW_INPUT" value: "RAW_INPUT" }
+      output_map { key: "TEXT" value: "TEXT" }
+    },
+    {
+      model_name: "nemo_model"
+      model_version: -1
+      input_map { key: "TEXT" value: "TEXT" }
+      output_map { key: "PREDICTION" value: "PREDICTION" }
+    },
+    {
+      model_name: "postprocess"
+      model_version: -1
+      input_map { key: "PREDICTION" value: "PREDICTION" }
+      output_map { key: "FINAL_OUTPUT" value: "FINAL_OUTPUT" }
+    }
+  ]
 }

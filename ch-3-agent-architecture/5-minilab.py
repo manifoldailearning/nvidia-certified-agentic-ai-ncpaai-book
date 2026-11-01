@@ -1,4 +1,4 @@
-# 3.8 Mini Lab – Tool-Using Agent (Alpha Vantage + Gemini 2.5 Flash)
+# 3.8 Mini Lab – Tool-Using Agent (Alpha Vantage + Gemini 3.8 Flash)
 # Get a free API key here: https://www.alphavantage.co/support/#api-key
 # Add your Google API key to .env as GOOGLE_API_KEY
 
@@ -14,9 +14,8 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 # LLM for summarization
 llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
+    model="gemini-3.8-flash",
     google_api_key=GOOGLE_API_KEY,
-    temperature=0.3,
 )
 
 class AgentState(TypedDict, total=False):
@@ -61,8 +60,8 @@ def summarize_node(state: AgentState) -> AgentState:
     try:
         if GOOGLE_API_KEY:
             res = llm.invoke(prompt)
-            # langchain-google-genai returns an object with .content
-            state["summary"] = res.content if hasattr(res, "content") else str(res)
+            # langchain-google-genai returns an AIMessage; .text gives the plain string
+            state["summary"] = res.text
         else:
             # fallback if LLM key not set
             state["summary"] = f"Summary: {stock_info} — the market appears stable today."

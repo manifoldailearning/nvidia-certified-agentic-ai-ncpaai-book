@@ -1,3 +1,6 @@
+# High-level guardrail policy (pseudo-code, not actual Colang or NeMo Guardrails syntax).
+# For a real NeMo Guardrails config.yml, see ch-8-nvidia-platform/6-guardrails.yaml.
+
 define guardrails:
     block if toxicity > 0.6
     block if contains_sensitive_pii
